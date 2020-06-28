@@ -1,8 +1,8 @@
-const { responseJson, responseErrorJson } = require('../utils/controllers');
-const { response } = require('express');
+const { responseJson, validatePayload } = require('../utils/controllers');
 
 const riskStatus = (req, res) => {
-    responseJson(res, { message: "hi there" });
+    validatePayload(res, req.body, '/InsuranceRisk');
+    responseJson(res, {status: 'ok'});
 };
 
 module.exports = {
