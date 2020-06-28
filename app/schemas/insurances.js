@@ -7,7 +7,6 @@ const houseSchema = {
             enum: [ "owned", "mortgaged" ]
         },
     },
-    required: [ "ownership_status" ],
 };
 
 const vehicleSchema = {
@@ -20,7 +19,6 @@ const vehicleSchema = {
             maximum: new Date().getFullYear() + 1,
         },
     },
-    required: [ "year" ],
 };
 
 const riskQuestionsSchema = {
@@ -43,9 +41,15 @@ const insuranceRiskSchema = {
             type: "integer",
             minimum: 0,
         },
-        dependents: { type: "integer" },
+        dependents: {
+            type: "integer",
+            minimum: 0,
+    },
         house: { "$ref": "/HouseOwnershipStatus" },
-        income: { type: "integer" },
+        income: {
+            type: "integer",
+            minimum: 0,
+    },
         marital_status: { type: "string", enum: [ "single", "married" ] },
         risk_questions: { "$ref": "/RiskQuestions" },
         vehicle: { "$ref": "/VehicleBasicInfos" },
