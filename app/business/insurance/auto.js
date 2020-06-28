@@ -11,8 +11,6 @@ const calculateRiskProfile = (baseScore, payload) => {
     const finalScore = score
         + scoreParameters.calculateBasicRiskScore(payload)
         + calculateVehicleAgeRisks(vehicle.year);
-    console.log(finalScore);
-    console.log('vehicle age risk', calculateVehicleAgeRisks(vehicle.year))
     return riskProfile = scoreParameters.getRiskProfileLabel(finalScore);
 }
 
