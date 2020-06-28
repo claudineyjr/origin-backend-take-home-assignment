@@ -15,7 +15,6 @@ const responseErrorJson = (res, statusCode = HttpStatus.INTERNAL_SERVER_ERROR, e
 };
 
 const validatePayload = (res, payload= {}, expectedSchema) => {
-  console.log(validator.validate(payload, expectedSchema))
   validator.validate(payload, expectedSchema).errors.length && responseErrorJson(res, HttpStatus.BAD_REQUEST, ApiErrors.BAD_REQUEST);
 };
 
