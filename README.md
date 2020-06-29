@@ -21,3 +21,8 @@ Toke home assignment for backend programmers
  **To run:**
  > npm start
 
+# API DOCS
+To see api-docs run the application and access:
+
+http://localhost:3000/api-docs
+
