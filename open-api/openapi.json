@@ -1,0 +1,207 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "description": "This application is used to calculate customer risk in various insurances areas.",
+    "version": "1.0.0",
+    "title": "Origin Backend Take Home Assignment",
+    "contact": {
+      "email": "claudiney.info@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/origin/assignment/v1",
+      "description": "Local Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "application",
+      "description": "Application Info"
+    },
+    {
+      "name": "insurances",
+      "description": "Insurances"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Return App information and version",
+        "description": "App information",
+        "tags": [
+          "application"
+        ],
+        "responses": {
+          "200": {
+            "description": "String with the app info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "info": {
+                      "type": "string",
+                      "example": "Origin Backend Take Home Assignment v1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/insurances/risk/status": {
+      "put": {
+        "summary": "Return user risk in various insurances areas",
+        "description": "Insurance information",
+        "tags": [
+          "insurances"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RiskStatusRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Risk information in all areas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RiskStatusResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RiskStatusResponse": {
+        "type": "object",
+        "properties": {
+          "auto": {
+            "type": "string",
+            "enum": [
+              "economic",
+              "ineligible",
+              "regular",
+              "responsible"
+            ]
+          },
+          "disability": {
+            "type": "string",
+            "enum": [
+              "economic",
+              "ineligible",
+              "regular",
+              "responsible"
+            ]
+          },
+          "home": {
+            "type": "string",
+            "enum": [
+              "economic",
+              "ineligible",
+              "regular",
+              "responsible"
+            ]
+          },
+          "life": {
+            "type": "string",
+            "enum": [
+              "economic",
+              "ineligible",
+              "regular",
+              "responsible"
+            ]
+          }
+        }
+      },
+      "RiskStatusRequest": {
+        "type": "object",
+        "properties": {
+          "age": {
+            "type": "number",
+            "example": 35,
+            "minimum": 0
+          },
+          "dependents": {
+            "type": "number",
+            "example": 2,
+            "minimum": 0
+          },
+          "house": {
+            "type": "object",
+            "properties": {
+              "ownership_status": {
+                "type": "string",
+                "enum": [
+                  "owned",
+                  "mortgaged"
+                ]
+              }
+            }
+          },
+          "income": {
+            "type": "number",
+            "example": 0,
+            "minimum": 0
+          },
+          "marital_status": {
+            "type": "string",
+            "enum": [
+              "single",
+              "married"
+            ]
+          },
+          "risk_questions": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 3,
+            "maxItems": 3,
+            "example": [
+              0,
+              1,
+              0
+            ]
+          },
+          "vehicle": {
+            "type": "object",
+            "properties": {
+              "year": {
+                "type": "number",
+                "minimum": 0,
+                "example": 2018
+              }
+            }
+          }
+        },
+        "required": [
+          "age",
+          "dependents",
+          "house",
+          "income",
+          "marital_status",
+          "risk_questions",
+          "vehicle"
+        ]
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about this project",
+    "url": "https://github.com/claudineyjr/origin-backend-take-home-assignment"
+  }
+}
